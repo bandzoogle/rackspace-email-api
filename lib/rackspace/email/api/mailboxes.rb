@@ -1,7 +1,9 @@
 class Rackspace::Email::Api::Mailboxes < Rackspace::Email::Api::Endpoint
-	def initialize(customer_id="me", domain)
-		@customer_id = customer_id
-		@domain = domain
+	def initialize(opts={})
+		@customer_id = opts[:customer_id] || "me"
+		@domain = opts[:domain]
+
+		raise Rackspace::Email::Api::Error.new("You must specify a domain") if @domain.nil?
 	end
 
 	def endpoint_path

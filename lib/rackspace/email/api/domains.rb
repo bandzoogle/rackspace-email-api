@@ -1,6 +1,6 @@
 class Rackspace::Email::Api::Domains < Rackspace::Email::Api::Endpoint
-	def initialize(customer_id="me")
-		@customer_id = customer_id
+	def initialize(opts={})
+		@customer_id = opts[:customer_id] || "me"
 	end
 
 	def endpoint_path

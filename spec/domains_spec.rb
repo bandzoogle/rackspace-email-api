@@ -8,7 +8,7 @@ describe Rackspace::Email::Api::Domains do
 		end
 	end
 
-	let(:endpoint) { Rackspace::Email::Api::Domains.new(12345) }
+	let(:endpoint) { Rackspace::Email::Api::Domains.new(customer_id:12345) }
 
 	describe "index" do
 		it "should work" do
