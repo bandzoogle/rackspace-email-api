@@ -24,7 +24,7 @@ describe Rackspace::Email::Api::Customer do
 					accountNumber: 12345,
 					referenceNumber: 567890
 				})
-			} 
+			}
 
 			it { expect(customer.name).to eql("Name") }
 			it { expect(customer.accountNumber).to eql(12345) }
