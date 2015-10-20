@@ -2,15 +2,18 @@ class Rackspace::Email::Api::ApiObject
 	attr_accessor :data
 
 	class << self
+		attr_accessor :_api_attributes
+		attr_accessor :_api_id_key
+
 		def	api_attributes attrs
-			@@api_attributes = attrs
+			self._api_attributes = attrs
 			attrs.each { |a|
 				attr_accessor a
 			}
 		end
 
 		def api_id_key k
-			@@api_id_key = k.to_sym
+			self._api_id_key = k.to_sym
 		end
 
 		def from_hash(h)
@@ -25,14 +28,13 @@ class Rackspace::Email::Api::ApiObject
 			id = nil
 		end
 
-		opts[@@api_id_key] = id unless id.nil?
+		opts[self.class._api_id_key] = id unless id.nil?
 		populate(opts)
 	end
 
 	def populate(h)
 		self.data = h.dup
-
-		@@api_attributes.each { |a|
+		self.class._api_attributes.each { |a|
 			v = h[a]
 			self.send("#{a}=".to_sym, v)
 		}

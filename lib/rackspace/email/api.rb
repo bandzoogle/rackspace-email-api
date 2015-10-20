@@ -7,8 +7,11 @@ require "rackspace/email/api/api_object"
 require "rackspace/email/api/customer"
 require "rackspace/email/api/customers"
 
-
 require "rackspace/email/api/domains"
+require "rackspace/email/api/domain"
+
+require "rackspace/email/api/mailboxes"
+require "rackspace/email/api/mailbox"
 
 require "addressable/uri"
 require "faraday"
