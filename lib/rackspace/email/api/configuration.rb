@@ -19,7 +19,7 @@ module Rackspace::Email::Api
 
     # Defaults go in here..
     def initialize
-      @response_format = 'json'
+      @response_format = 'application/json'
       @scheme = 'https'
       @host = 'api.emailsrvr.com'
       @user_agent = "ruby-#{Rackspace::Email::Api::VERSION}"
