@@ -9,4 +9,9 @@ class Rackspace::Email::Api::Mailboxes < Rackspace::Email::Api::Endpoint
 	def endpoint_path
 		"customers/#{@customer_id}/domains/#{@domain}/rs/mailboxes"
 	end
+
+
+	def create(opts={})
+		super(Rackspace::Email::Api::Mailbox::DEFAULTS.merge(opts))
+	end
 end

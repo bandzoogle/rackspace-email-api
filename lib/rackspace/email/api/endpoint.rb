@@ -85,12 +85,23 @@ class Rackspace::Email::Api::Endpoint
 	def execute(verb, opts={})
 		ensure_api_credentials
 
-		conn = Faraday.new(base_url) do |c|
-			c.adapter Faraday.default_adapter
-			c.response :logger, ::Logger.new(STDOUT) #, bodies: true
+		puts opts.inspect
+
+		target_url = base_url
+		action = ""
+		if verb != :index
+			action = opts.delete(:id)
 		end
 
-		x = conn.send(verb) do |req|
+		conn = Faraday.new(target_url) do |c|
+			c.response :logger, ::Logger.new(STDOUT) #, bodies: true
+			c.use Faraday::Request::UrlEncoded
+			c.request :url_encoded
+			c.adapter Faraday.default_adapter
+		end
+
+puts "#{verb} -- #{target_url} -- #{action}"
+		x = conn.send(verb, action, opts) do |req|
 			req.headers['User-Agent'] = Rackspace::Email::Api.configuration.user_agent
 			req.headers['X-Api-Signature'] = api_signature
 			req.headers['Accept'] = Rackspace::Email::Api.configuration.response_format

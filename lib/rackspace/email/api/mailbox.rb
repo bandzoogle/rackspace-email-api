@@ -6,6 +6,10 @@ class Rackspace::Email::Api::Mailbox < Rackspace::Email::Api::ApiObject
 
 	api_id_key :name
 
+	DEFAULTS = {
+		password: "password12345"
+	}
+
 	def accountNumber
 		endpoint_opts[:accountNumber]
 	end
