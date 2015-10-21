@@ -13,6 +13,9 @@ require "rackspace/email/api/domain"
 require "rackspace/email/api/mailboxes"
 require "rackspace/email/api/mailbox"
 
+require "rackspace/email/api/aliases"
+require "rackspace/email/api/alias"
+
 require "addressable/uri"
 require "faraday"
 require 'date/format'

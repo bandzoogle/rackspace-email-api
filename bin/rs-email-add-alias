@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+
+require 'optparse'
+require 'rackspace/email/api'
+require 'json'
+
+opts = OptionParser.new
+opts.on('-a', '--accountNumber [ARG]')    { |a| @accountNumber = a }
+opts.parse!(ARGV)
+
+keys = JSON.parse(File.read("#{Dir.home}/.rackspace-email.json"))
+Rackspace::Email::Api.configure do |conf|
+	conf.user_key = keys["user_key"]
+	conf.api_key = keys["api_key"]
+end
+
+email = ARGV.shift
+mailbox, domain = email.split(/@/)
+
+aliases = ARGV
+
+result = Rackspace::Email::Api::Aliases.new(customer_id:@accountNumber, domain:domain).create(id:mailbox, aliasEmails:aliases)
+
+puts result.body
+

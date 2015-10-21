@@ -11,6 +11,10 @@ class Rackspace::Email::Api::Endpoint
 		def data_class=(x)
 			@@data_class = x
 		end
+
+		def data_class
+			@@data_class
+		end
 	end
 
 	def endpoint_path
@@ -100,7 +104,6 @@ class Rackspace::Email::Api::Endpoint
 			c.adapter Faraday.default_adapter
 		end
 
-puts "#{verb} -- #{target_url} -- #{action}"
 		x = conn.send(verb, action, opts) do |req|
 			req.headers['User-Agent'] = Rackspace::Email::Api.configuration.user_agent
 			req.headers['X-Api-Signature'] = api_signature
@@ -119,7 +122,7 @@ puts "#{verb} -- #{target_url} -- #{action}"
 
 	def show(id, opts={})
 		data = execute(:get, {id: id}.merge(opts))
-		data_class.new(data)
+		self.class.data_class.new(data)
 	end
 
 	def update(id, opts={})
