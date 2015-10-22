@@ -6,7 +6,15 @@ class Rackspace::Email::Api::Alias < Rackspace::Email::Api::ApiObject
 
 	api_id_key :name
 
-	def emails
+	def accountNumber
+		endpoint_opts[:accountNumber]
+	end
 
+	def domain
+		endpoint_opts[:domain]
+	end
+
+	def email
+		[name, domain].join("@")
 	end
 end

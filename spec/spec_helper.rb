@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# require 'simplecov'
-# SimpleCov.start
+require 'simplecov'
+SimpleCov.start
 
 require 'bundler/setup'
 Bundler.require
