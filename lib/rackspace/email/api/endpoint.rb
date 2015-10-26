@@ -128,7 +128,8 @@ class Rackspace::Email::Api::Endpoint
 	def update(id, opts={})
 	end
 
-	def destroy(id)
-		execute(:destroy, opts)
+	def destroy(id, opts={})
+		data = {id: id}.merge(opts)
+		execute(:destroy, data)
 	end
 end
