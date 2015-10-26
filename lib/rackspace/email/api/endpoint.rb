@@ -129,6 +129,6 @@ class Rackspace::Email::Api::Endpoint
 	end
 
 	def destroy(id)
-
+		execute(:destroy, opts)
 	end
 end
