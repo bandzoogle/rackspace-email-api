@@ -113,7 +113,7 @@ class Rackspace::Email::Api::Endpoint
 	end
 
 	def index(opts={})
-		execute(:get)
+		execute(:get, opts)
 	end
 
 	def create(opts={})
