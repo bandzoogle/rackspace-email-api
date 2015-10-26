@@ -24,9 +24,9 @@ describe Rackspace::Email::Api::Mailboxes do
 		end
 	end
 
-	describe "destroy" do
+	describe "delete" do
 		it "should work" do
-			url = endpoint.url_for(:destroy, id:"foo").to_s
+			url = endpoint.url_for(:delete, id:"foo").to_s
 			expect(url).to eql("https://api.emailsrvr.com/v1/customers/12345/domains/domain.com/rs/mailboxes/foo")
 		end
 	end

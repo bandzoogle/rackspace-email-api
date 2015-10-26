@@ -18,7 +18,7 @@ end
 
 email = ARGV[0]
 mailbox, domain = email.split(/@/)
-result = Rackspace::Email::Api::Mailboxes.new(customer_id:@accountNumber, domain:domain).destroy(id:mailbox)
+result = Rackspace::Email::Api::Mailboxes.new(customer_id:@accountNumber, domain:domain).delete(id:mailbox)
 
 puts result.inspect
 
