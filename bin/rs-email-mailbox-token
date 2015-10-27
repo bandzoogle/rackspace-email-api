@@ -6,21 +6,25 @@ require 'optparse'
 require 'rackspace/email/api'
 require 'json'
 
-@accountNumber = "all"
-
 opts = OptionParser.new
 opts.on('-a', '--accountNumber [ARG]')    { |a| @accountNumber = a }
 opts.parse!(ARGV)
 
-
 keys = JSON.parse(File.read("#{Dir.home}/.rackspace-email.json"))
-
-
 Rackspace::Email::Api.configure do |conf|
 	conf.user_key = keys["user_key"]
 	conf.api_key = keys["api_key"]
 end
 
-x = Rackspace::Email::Api::Domains.new(customer_id:@accountNumber).index
+email = ARGV[0]
+mailbox, domain = email.split(/@/)
 
-puts JSON.pretty_generate(JSON.parse(x.body))
+m = Rackspace::Email::Api::Mailbox.new({
+		name:mailbox
+	},
+	{
+		domain: domain,
+		accountNumber: @accountNumber
+	})
+
+puts m.login_token
