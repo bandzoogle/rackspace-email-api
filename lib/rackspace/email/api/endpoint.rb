@@ -126,6 +126,8 @@ class Rackspace::Email::Api::Endpoint
 	end
 
 	def update(id, opts={})
+		data = {id: id}.merge(opts)
+		execute(:put, data)
 	end
 
 	def delete(id, opts={})
