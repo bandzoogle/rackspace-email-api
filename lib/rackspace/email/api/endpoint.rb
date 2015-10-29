@@ -122,7 +122,12 @@ class Rackspace::Email::Api::Endpoint
 
 	def show(id, opts={})
 		data = execute(:get, {id: id}.merge(opts))
-		self.class.data_class.new(data)
+		raw_data = opts.delete(:raw_data) || false
+		if raw_data
+			data
+		else
+			self.class.data_class.new(JSON.parse(data.body))
+		end
 	end
 
 	def update(id, opts={})
