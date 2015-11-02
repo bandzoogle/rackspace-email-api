@@ -25,8 +25,6 @@ require 'base64'
 require 'active_support'
 require 'active_support/core_ext/string/inflections'
 
-require 'pry'
-
 
 # http://api-wiki.apps.rackspace.com/api-wiki/index.php/Main_Page#Ruby
 
