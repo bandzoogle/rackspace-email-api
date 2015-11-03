@@ -103,7 +103,7 @@ class Rackspace::Email::Api::Endpoint
 			c.use Faraday::Request::UrlEncoded
 
 			if defined?(Rails)
-				c.use :http_cache
+				c.use :http_cache, store: Rails.cache, logger: Rails.logger
 			end
 
 			c.request :url_encoded
