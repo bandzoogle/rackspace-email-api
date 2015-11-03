@@ -23,6 +23,11 @@ require 'digest/sha1'
 require 'base64'
 
 require 'active_support'
+require 'active_support/cache'
+
+
+require 'faraday-http-cache'
+
 require 'active_support/core_ext/string/inflections'
 
 
@@ -61,14 +66,6 @@ module Rackspace
 			    self.version ||= configuration.version
 			  end
 			end
-
-
-			# commands:
-			# list domains for a customer -- note: can put list of domains in URL separated by commas
-			# add/remove domain
-			# add/edit/remove mailbox -- mailboxes do forwarding
-
-
     end
   end
 end

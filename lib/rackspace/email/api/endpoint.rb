@@ -97,9 +97,15 @@ class Rackspace::Email::Api::Endpoint
 			action = opts.delete(:id)
 		end
 
+		#store = ActiveSupport::Cache.lookup_store(:mem_cache_store, ['localhost:11211'])
 		conn = Faraday.new(target_url) do |c|
 			c.response :logger, ::Logger.new(STDOUT) #, bodies: true
 			c.use Faraday::Request::UrlEncoded
+
+			if defined?(Rails)
+				c.use :http_cache
+			end
+
 			c.request :url_encoded
 			c.adapter Faraday.default_adapter
 		end

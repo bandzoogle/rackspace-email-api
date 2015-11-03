@@ -24,15 +24,6 @@ module Rackspace::Email::Api
       @host = 'api.emailsrvr.com'
       @user_agent = "ruby-#{Rackspace::Email::Api::VERSION}"
       @version = 'v1'
-
-      # # Build the default set of resource names from the filenames of the API documentation
-      # begin
-      #   api_docs_path = File.join(File.dirname(__FILE__), "../../api_docs")
-      #   @resource_names = `find #{api_docs_path} -name '*.json'`.split("\n").map {|f| f.split("/").last.sub('.json', '') }.sort
-      #   true
-      # rescue
-      #   raise "Problem loading the resource files in ./api_docs/"
-      # end
     end
 
     def base_url

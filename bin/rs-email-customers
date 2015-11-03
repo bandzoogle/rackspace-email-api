@@ -8,7 +8,6 @@ require 'json'
 
 keys = JSON.parse(File.read("#{Dir.home}/.rackspace-email.json"))
 
-
 Rackspace::Email::Api.configure do |conf|
 	conf.user_key = keys["user_key"]
 	conf.api_key = keys["api_key"]
