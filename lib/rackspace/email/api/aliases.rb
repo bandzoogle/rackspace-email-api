@@ -21,13 +21,13 @@ class Rackspace::Email::Api::Aliases < Rackspace::Email::Api::Endpoint
 		super(opts)
 	end
 
-	def update(opts={})
+	def update(id, opts={})
 		opts[:aliasEmails] = [ opts[:aliasEmails] ].
 			flatten.
 			collect { |z| z.split }.flatten
 
 		opts[:aliasEmails] = opts[:aliasEmails].join(", ")
 
-		super(opts)
+		super(id, opts)
 	end
 end

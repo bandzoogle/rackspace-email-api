@@ -13,8 +13,8 @@ class Rackspace::Email::Api::Domain < Rackspace::Email::Api::ApiObject
 
 	DEFAULTS = {
 		serviceType:'rsemail',
-		rsEmailMaxNumberMailboxes:5,
-		rsEmailBaseMailboxSize: 1000 # size in mb
+		rsEmailMaxNumberMailboxes:10,
+		rsEmailBaseMailboxSize: 25 * 1024 # size in mb
 	}
 
 	# /customers/123456789/domains/example.com/mailboxes
