@@ -18,7 +18,6 @@ require "rackspace/email/api/alias"
 
 require "addressable/uri"
 require "faraday"
-require 'date/format'
 require 'digest/sha1'
 require 'base64'
 
