@@ -91,13 +91,15 @@ class Rackspace::Email::Api::Endpoint
 
 		puts opts.inspect
 
-		target_url = base_url
+		call_api_url(base_url, verb, opts)
+	end
+
+	def call_api_url(target_url, verb, opts={})
 		action = ""
 		if verb != :index
 			action = opts.delete(:id)
 		end
 
-		#store = ActiveSupport::Cache.lookup_store(:mem_cache_store, ['localhost:11211'])
 		conn = Faraday.new(target_url) do |c|
 			c.response :logger, ::Logger.new(STDOUT) #, bodies: true
 			c.use Faraday::Request::UrlEncoded
