@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency(%q<simplecov>, [">= 0"])
 
   spec.add_dependency "dalli"
-  spec.add_dependency "faraday", "~> 0.12.2"
+  spec.add_dependency "faraday", "~> 0.11"
   spec.add_dependency 'addressable', '>=2.2.4'
   spec.add_dependency "activesupport"
 end
