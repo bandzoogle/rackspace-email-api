@@ -13,7 +13,7 @@ class Rackspace::Email::Api::Safelist < Rackspace::Email::Api::Endpoint
   # http://api-wiki.apps.rackspace.com/api-wiki/index.php?title=Domain_Spam_(Rest_API)#Add_Safelist
   def add(email)
     url = [ base_url, email ].join('/')
-    create(url)
+    call_api_url(url, :post)
   end
 
   def remove(email)

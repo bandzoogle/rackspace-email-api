@@ -20,7 +20,7 @@ describe Rackspace::Email::Api::Safelist do
 	describe "add" do
 		it "should work" do
       url = 'https://api.emailsrvr.com/v1/customers/12345/domains/domain.com/spam/safelist/foo@bar.com'
-      expect(endpoint).to receive(:create).with(url)
+      expect(endpoint).to receive(:call_api_url).with(url, :post)
       endpoint.add("foo@bar.com")
 		end
 	end
