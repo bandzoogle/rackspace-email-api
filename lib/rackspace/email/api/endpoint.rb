@@ -88,9 +88,6 @@ class Rackspace::Email::Api::Endpoint
 
 	def execute(verb, opts={})
 		ensure_api_credentials
-
-		puts opts.inspect
-
 		call_api_url(base_url, verb, opts)
 	end
 

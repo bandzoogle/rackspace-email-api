@@ -16,13 +16,14 @@ require "rackspace/email/api/mailbox"
 require "rackspace/email/api/aliases"
 require "rackspace/email/api/alias"
 
+require "rackspace/email/api/safelist"
+
 require "addressable/uri"
 require "faraday"
 require 'digest/sha1'
 require 'base64'
 
 require 'active_support'
-# require 'active_support/cache'
 require 'active_support/core_ext/string/inflections'
 
 

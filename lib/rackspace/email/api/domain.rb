@@ -21,4 +21,8 @@ class Rackspace::Email::Api::Domain < Rackspace::Email::Api::ApiObject
 	def mailboxes
 		Rackspace::Email::Api::Mailboxes.new(self.accountNumber, self.name)
 	end
+
+	def safelist
+		Rackspace::Email::Api::Safelists.new(self.accountNumber, self.name)
+	end
 end
