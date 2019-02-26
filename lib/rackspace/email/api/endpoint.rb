@@ -101,9 +101,9 @@ class Rackspace::Email::Api::Endpoint
 			c.response :logger, ::Logger.new(STDOUT) #, bodies: true
 			c.use Faraday::Request::UrlEncoded
 
-			if defined?(Rails)
-				c.use :http_cache, store: Rails.cache, logger: Rails.logger
-			end
+			# if defined?(Rails)
+			# 	c.use :http_cache, store: Rails.cache, logger: Rails.logger
+			# end
 
 			c.request :url_encoded
 			c.adapter Faraday.default_adapter
