@@ -98,7 +98,7 @@ class Rackspace::Email::Api::Endpoint
 		end
 
 		conn = Faraday.new(target_url) do |c|
-			c.response :logger, ::Logger.new(STDOUT) #, bodies: true
+			# c.response :logger, ::Logger.new(STDOUT) #, bodies: true
 			c.use Faraday::Request::UrlEncoded
 
 			# if defined?(Rails)
