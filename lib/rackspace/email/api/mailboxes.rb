@@ -16,7 +16,7 @@ module Rackspace
         end
 
         def create(opts = {})
-          super(Rackspace::Email::Api::Mailbox::DEFAULTS.merge(opts))
+          super(opts)
         end
       end
     end
