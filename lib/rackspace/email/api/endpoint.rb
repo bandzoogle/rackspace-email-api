@@ -108,7 +108,6 @@ module Rackspace
             joiner = target_url.to_s.include?('?') ? '&' : '?'
             target_url = [target_url, url_params].join(joiner)
           end
-          puts target_url
 
           klass = case verb
                   when :get
@@ -130,7 +129,10 @@ module Rackspace
           req.set_form_data opts if verb != :get
 
           res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme.casecmp('https').zero?) do |http|
-            http.request(req)
+              http.read_timeout = Rackspace::Email::Api.configuration.timeout
+              http.write_timeout = Rackspace::Email::Api.configuration.timeout
+              http.continue_timeout = Rackspace::Email::Api.configuration.timeout
+              http.request(req)
           end
         end
 

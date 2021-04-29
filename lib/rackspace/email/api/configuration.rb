@@ -6,7 +6,14 @@ module Rackspace
       class Configuration
         require 'rackspace/email/api/version'
 
-        attr_accessor :version, :user_key, :api_key, :scheme, :host, :user_agent, :logger
+        attr_accessor :version,
+          :user_key,
+          :api_key,
+          :scheme,
+          :host,
+          :user_agent,
+          :logger,
+          :timeout
 
         # Response format can be 'json' (default) or 'xml'
         attr_accessor :response_format
@@ -18,6 +25,7 @@ module Rackspace
           @host = 'api.emailsrvr.com'
           @user_agent = "ruby-#{Rackspace::Email::Api::VERSION}"
           @version = 'v1'
+          @timeout = 30
         end
 
         def base_url

@@ -31,8 +31,6 @@ require 'active_support/core_ext/string/inflections'
 
 # http://api-wiki.apps.rackspace.com/api-wiki/index.php/Main_Page#Ruby
 
-# create a 'customer' for each bz account
-
 require 'logger'
 
 module Rackspace
