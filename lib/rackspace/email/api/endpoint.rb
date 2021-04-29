@@ -100,9 +100,11 @@ module Rackspace
         end
 
         def call_api_url(target_url, verb, opts = {})
-          action = ''
-          action = opts.delete(:id) if verb != :index
-
+          if verb != :index && opts.key?(:id)
+            action = opts.delete(:id)
+            target_url = [target_url, action].join('/')
+          end
+          
           if verb == :get
             url_params = URI.encode_www_form(opts)
             joiner = target_url.to_s.include?('?') ? '&' : '?'
@@ -122,17 +124,16 @@ module Rackspace
 
           uri = URI(target_url)
           req = klass.new(uri,
-                          'User-Agent' => Rackspace::Email::Api.configuration.user_agent,
-                          'X-Api-Signature' => api_signature,
-                          'Accept' => Rackspace::Email::Api.configuration.response_format)
+            'User-Agent' => Rackspace::Email::Api.configuration.user_agent,
+            'X-Api-Signature' => api_signature,
+            'Accept' => Rackspace::Email::Api.configuration.response_format)
 
           req.set_form_data opts if verb != :get
-
           res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme.casecmp('https').zero?) do |http|
-              http.read_timeout = Rackspace::Email::Api.configuration.timeout
-              http.write_timeout = Rackspace::Email::Api.configuration.timeout
-              http.continue_timeout = Rackspace::Email::Api.configuration.timeout
-              http.request(req)
+            http.read_timeout = Rackspace::Email::Api.configuration.timeout
+            http.write_timeout = Rackspace::Email::Api.configuration.timeout
+            http.continue_timeout = Rackspace::Email::Api.configuration.timeout
+            http.request(req)
           end
         end
 

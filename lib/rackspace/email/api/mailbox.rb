@@ -38,8 +38,6 @@ module Rackspace
             http.request(req)
           end
 
-          res.body
-
           JSON.parse(res.body)['token']
         end
       end
