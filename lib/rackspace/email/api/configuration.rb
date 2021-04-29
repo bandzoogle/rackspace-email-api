@@ -1,42 +1,37 @@
-module Rackspace::Email::Api
-  class Configuration
-    require 'rackspace/email/api/version'
+# frozen_string_literal: true
 
-    attr_accessor :version
+module Rackspace
+  module Email
+    module Api
+      class Configuration
+        require 'rackspace/email/api/version'
 
-    attr_accessor :user_key
-    attr_accessor :api_key
+        attr_accessor :version, :user_key, :api_key, :scheme, :host, :user_agent, :logger
 
-    # Response format can be 'json' (default) or 'xml'
-    attr_accessor :response_format
+        # Response format can be 'json' (default) or 'xml'
+        attr_accessor :response_format
 
-    attr_accessor :scheme
-    attr_accessor :host
+        # Defaults go in here..
+        def initialize
+          @response_format = 'application/json'
+          @scheme = 'https'
+          @host = 'api.emailsrvr.com'
+          @user_agent = "ruby-#{Rackspace::Email::Api::VERSION}"
+          @version = 'v1'
+        end
 
-    attr_accessor :user_agent
+        def base_url
+          Addressable::URI.new(
+            scheme: scheme,
+            host: host,
+            path: version
+          )
+        end
 
-    attr_accessor :logger
-
-    # Defaults go in here..
-    def initialize
-      @response_format = 'application/json'
-      @scheme = 'https'
-      @host = 'api.emailsrvr.com'
-      @user_agent = "ruby-#{Rackspace::Email::Api::VERSION}"
-      @version = 'v1'
-    end
-
-    def base_url
-      Addressable::URI.new(
-        :scheme => self.scheme,
-        :host => self.host,
-        :path => self.version
-      )
-    end
-
-    def clear
-      initialize
+        def clear
+          initialize
+        end
+      end
     end
   end
-
 end

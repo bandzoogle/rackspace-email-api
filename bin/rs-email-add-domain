@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
@@ -7,16 +8,15 @@ require 'rackspace/email/api'
 require 'json'
 
 opts = OptionParser.new
-opts.on('-a', '--accountNumber [ARG]')    { |a| @accountNumber = a }
+opts.on('-a', '--accountNumber [ARG]') { |a| @accountNumber = a }
 opts.parse!(ARGV)
 
 keys = JSON.parse(File.read("#{Dir.home}/.rackspace-email.json"))
 Rackspace::Email::Api.configure do |conf|
-	conf.user_key = keys["user_key"]
-	conf.api_key = keys["api_key"]
+  conf.user_key = keys['user_key']
+  conf.api_key = keys['api_key']
 end
 
-result = Rackspace::Email::Api::Domains.new(customer_id:@accountNumber).create(id:ARGV[0])
+result = Rackspace::Email::Api::Domains.new(customer_id: @accountNumber).create(id: ARGV[0])
 
 puts JSON.pretty_generate(JSON.parse(result.body))
-

@@ -1,13 +1,21 @@
-class Rackspace::Email::Api::Domains < Rackspace::Email::Api::Endpoint
-	def initialize(opts={})
-		@customer_id = opts[:customer_id] || "me"
-	end
+# frozen_string_literal: true
 
-	def endpoint_path
-		"customers/#{@customer_id}/domains"
-	end
+module Rackspace
+  module Email
+    module Api
+      class Domains < Rackspace::Email::Api::Endpoint
+        def initialize(opts = {})
+          @customer_id = opts[:customer_id] || 'me'
+        end
 
-	def create(opts={})
-		super(Rackspace::Email::Api::Domain::DEFAULTS.merge(opts))
-	end
+        def endpoint_path
+          "customers/#{@customer_id}/domains"
+        end
+
+        def create(opts = {})
+          super(Rackspace::Email::Api::Domain::DEFAULTS.merge(opts))
+        end
+      end
+    end
+  end
 end
