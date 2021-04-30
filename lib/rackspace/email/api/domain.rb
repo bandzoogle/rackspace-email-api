@@ -1,28 +1,36 @@
-class Rackspace::Email::Api::Domain < Rackspace::Email::Api::ApiObject
-	api_attributes [:name, :accountNumber, :serviceType,
-	 :exchangeBaseMailboxSize, :exchangeUsedStorage, :exchangeTotalStorage,
-	 :exchangeExtraStorage, :exchangeMaxNumMailboxes,
-	 :rsEmailBaseMailboxSize, :rsEmailMaxNumberMailboxes,
-	 :rsEmailExtraStorage, :rsEmailUsedStorage,
-	 :aliases,
-	 :archivingServiceEnabled, :publicFoldersEnabled,
-	 :blackBerryMobileServiceEnabled,:blackBerryLicenses,
-	 :activeSyncMobileServiceEnabled, :activeSyncLicenses]
+# frozen_string_literal: true
 
-	api_id_key :name
+module Rackspace
+  module Email
+    module Api
+      class Domain < Rackspace::Email::Api::ApiObject
+        api_attributes %i[name accountNumber serviceType
+                          exchangeBaseMailboxSize exchangeUsedStorage exchangeTotalStorage
+                          exchangeExtraStorage exchangeMaxNumMailboxes
+                          rsEmailBaseMailboxSize rsEmailMaxNumberMailboxes
+                          rsEmailExtraStorage rsEmailUsedStorage
+                          aliases
+                          archivingServiceEnabled publicFoldersEnabled
+                          blackBerryMobileServiceEnabled blackBerryLicenses
+                          activeSyncMobileServiceEnabled activeSyncLicenses]
 
-	DEFAULTS = {
-		serviceType:'rsemail',
-		rsEmailMaxNumberMailboxes:10,
-		rsEmailBaseMailboxSize: 25 * 1024 # size in mb
-	}
+        api_id_key :name
 
-	# /customers/123456789/domains/example.com/mailboxes
-	def mailboxes
-		Rackspace::Email::Api::Mailboxes.new(self.accountNumber, self.name)
-	end
+        DEFAULTS = {
+          serviceType: 'rsemail',
+          rsEmailMaxNumberMailboxes: 10,
+          rsEmailBaseMailboxSize: 25 * 1024 # size in mb
+        }.freeze
 
-	def safelist
-		Rackspace::Email::Api::Safelists.new(self.accountNumber, self.name)
-	end
+        # /customers/123456789/domains/example.com/mailboxes
+        def mailboxes
+          Rackspace::Email::Api::Mailboxes.new(accountNumber, name)
+        end
+
+        def safelist
+          Rackspace::Email::Api::Safelists.new(accountNumber, name)
+        end
+      end
+    end
+  end
 end

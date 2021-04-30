@@ -1,21 +1,19 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
 require 'rackspace/email/api'
 require 'json'
 
-
 keys = JSON.parse(File.read("#{Dir.home}/.rackspace-email.json"))
 
-
 Rackspace::Email::Api.configure do |conf|
-	conf.user_key = keys["user_key"]
-	conf.api_key = keys["api_key"]
+  conf.user_key = keys['user_key']
+  conf.api_key = keys['api_key']
 end
 
-
-x = Rackspace::Email::Api::Domains.new(customer_id:@accountNumber).show(ARGV[0])
+x = Rackspace::Email::Api::Domains.new(customer_id: @accountNumber).show(ARGV[0])
 
 puts x.inspect
-#puts JSON.pretty_generate(JSON.parse(x.body))
+# puts JSON.pretty_generate(JSON.parse(x.body))
