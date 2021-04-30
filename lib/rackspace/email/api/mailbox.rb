@@ -22,7 +22,11 @@ module Rackspace
           [name, domain].join('@')
         end
 
-        def login_token
+        #
+        # generate login token for mailbox. if full=true, return the entire response,
+        # with expiration info, etc. otherwise just return the token needed to login
+        #
+        def login_token(full=false)
           url = [
             Rackspace::Email::Api.configuration.base_url.dup,
             "customers/#{accountNumber}/domains/#{domain}/rs/mailboxes/#{name}/loginToken"
@@ -38,7 +42,8 @@ module Rackspace
             http.request(req)
           end
 
-          JSON.parse(res.body)['token']
+          result = JSON.parse(res.body)
+          full == true ? result : result['token']
         end
       end
     end
