@@ -13,6 +13,8 @@ module Rackspace
         end
 
         def post_url(url)
+          puts url
+
           uri = URI(url)
           req = Net::HTTP::Post.new(uri,
                                     'User-Agent' => Rackspace::Email::Api.configuration.user_agent,
