@@ -22,8 +22,6 @@ module Rackspace
           res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme.casecmp('https').zero?) do |http|
             http.request(req)
           end
-
-          JSON.parse(res.body)
         end
 
         def disable
